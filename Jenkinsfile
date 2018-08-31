@@ -1,14 +1,11 @@
 pipeline {
-	agent none
+	agent any
 
     environment {
         DOCKER_IMAGE_NAME = "saviovettoor/sample_java_app"
     }
     stages {
         stage('Build') {
-	    agent {
-               	docker { image 'maven:3-alpine' }
-            }
             steps {
                 echo 'Running build'
                 sh 'mvn package'
@@ -43,7 +40,6 @@ pipeline {
             }
         }
         stage('DeployToProduction') {
-	    agent any
             when {
                 branch 'master'
             }
