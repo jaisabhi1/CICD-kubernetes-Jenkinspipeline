@@ -1,15 +1,17 @@
 pipeline {
-	agent any
+	agent none
 
     environment {
         DOCKER_IMAGE_NAME = "saviovettoor/sample_java_app"
     }
     stages {
         stage('Build') {
+	    agent {
+               	docker { image 'maven:3-alpine' }
+            }
             steps {
                 echo 'Running build'
-		sh 'source /etc/profile.d/maven.sh'
-                sh '/usr/local/maven/bin/mvn package'
+                sh 'mvn package'
                 archiveArtifacts artifacts: 'target/java-tomcat-maven-example.war'
             }
         }
@@ -41,6 +43,7 @@ pipeline {
             }
         }
         stage('DeployToProduction') {
+			agent any
             when {
                 branch 'master'
             }
