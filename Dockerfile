@@ -1,13 +1,5 @@
-FROM node:alpine
-
-EXPOSE 2000
-
-RUN mkdir -p /app
-
-WORKDIR /app
-
-ADD server.js ./
-
-COPY package.json ./
-
-CMD ["npm","start"]
+FROM java:8
+WORKDIR /
+ADD java-tomcat-maven-example.war java-app.war
+EXPOSE 8080
+CMD java - jar java-app.war
