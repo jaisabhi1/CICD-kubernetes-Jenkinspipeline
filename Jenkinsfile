@@ -12,7 +12,7 @@ pipeline {
             steps {
                 echo 'Running build'
                 sh 'mvn package'
-                archiveArtifacts artifacts: 'dist/java-tomcat-maven-example.war'
+                archiveArtifacts artifacts: 'target/java-tomcat-maven-example.war'
             }
         }
         stage('Build Docker Image') {
