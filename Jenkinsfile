@@ -9,7 +9,7 @@ pipeline {
             steps {
                 echo 'Running build'
 		sh 'source /etc/profile.d/maven.sh'
-                sh 'mvn package'
+                sh '/usr/local/maven/bin/mvn package'
                 archiveArtifacts artifacts: 'target/java-tomcat-maven-example.war'
             }
         }
