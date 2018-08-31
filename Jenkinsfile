@@ -6,10 +6,10 @@ pipeline {
     }
     stages {
         stage('Build') {
-            steps {
-			agent {
-                docker { image 'maven:3-alpine' }
+	    agent {
+               	docker { image 'maven:3-alpine' }
             }
+            steps {
                 echo 'Running build'
                 sh 'mvn package'
                 archiveArtifacts artifacts: 'dist/trainSchedule.zip'
@@ -20,7 +20,7 @@ pipeline {
                 branch 'master'
             }
             steps {
-				echo 'Creating Docker Image'
+		echo 'Creating Docker Image'
                 script {
                     app = docker.build(DOCKER_IMAGE_NAME)
                     app.inside {
