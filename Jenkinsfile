@@ -1,5 +1,5 @@
 pipeline {
-	agent any
+	agent none
 
     environment {
         DOCKER_IMAGE_NAME = "saviovettoor/sample_java_app"
@@ -43,6 +43,7 @@ pipeline {
             }
         }
         stage('DeployToProduction') {
+	   agent any
             when {
                 branch 'master'
             }
