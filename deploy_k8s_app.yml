@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
       - name:  my-k8sjavaapp
-        image:  $DOCKER_IMAGE_NAME:$BUILD_NUMBER
+        image: saviovettoor/sample_java_app:latest
         #To fetch the image from local only(not from docker hub)
         #imagePullPolicy: Never
         ports:
