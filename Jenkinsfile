@@ -52,7 +52,7 @@ pipeline {
                 kubernetesDeploy(
                     kubeconfigId: 'kubeconfig',
                     configs: 'deploy_k8s_app.yml',
-                    enableConfigSubstitution: true                  
+                    enableConfigSubstitution: true  //specify that substitute values for $ variables in deploy_k8s_app.yml file          
                 )
             }
         }
