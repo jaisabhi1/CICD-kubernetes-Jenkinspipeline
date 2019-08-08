@@ -15,8 +15,7 @@ pipeline {
                 archiveArtifacts artifacts: 'target/java-tomcat-maven-example.war'
             }
         }
-    }	    
-    stage('Build Docker Image') {
+        stage('Build Docker Image') {
             steps {
 		echo 'Creating Docker Image'
                 script {
@@ -26,27 +25,27 @@ pipeline {
                     }
                 }
             }
-	}	
-     stage('Push Docker Image') {
+        }
+        stage('Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'DOCKER_HUB') {
+                    docker.withRegistry('https://registry.hub.docker.com', 'DOCKER_HUB) {
                         app.push("${env.BUILD_NUMBER}")
                         app.push("latest")
                     }
                 }
             }
-	}	
-        
-     stage('DeployToProduction') {
+        }
+        stage('DeployToProduction') {
             steps {
                 input 'Deploy to Production?'
                 milestone(1)
                 kubernetesDeploy(
-                    kubeconfigId: 'Kubeconfig',
+                    kubeconfigId: 'kubeconfig',
                     configs: 'deploy_k8s_app.yml',
                     enableConfigSubstitution: true  //specify that substitute values for $ variables in deploy_k8s_app.yml file          
                 )
             }
         }
     }
+}
