@@ -16,8 +16,8 @@ pipeline {
             }
         }
     }	    
-   stage('Build Docker Image') {
-              steps {
+    stage('Build Docker Image') {
+            steps {
 		echo 'Creating Docker Image'
                 script {
                     app = docker.build(DOCKER_IMAGE_NAME)
@@ -27,7 +27,7 @@ pipeline {
                 }
             }
 	}	
-        stage('Push Docker Image') {
+     stage('Push Docker Image') {
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'DOCKER_HUB') {
@@ -38,7 +38,7 @@ pipeline {
             }
 	}	
         
-        stage('DeployToProduction') {
+     stage('DeployToProduction') {
             steps {
                 input 'Deploy to Production?'
                 milestone(1)
