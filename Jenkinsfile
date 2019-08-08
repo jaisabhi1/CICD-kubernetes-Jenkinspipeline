@@ -2,7 +2,7 @@ pipeline {
 	agent any
 
     environment {
-        DOCKER_IMAGE_NAME = "saviovettoor/sample_java_app"
+        DOCKER_IMAGE_NAME = "jaisabhi1/sample_java_app"
     }
     stages {
         stage('Build') {
@@ -35,7 +35,7 @@ pipeline {
             }
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'DockerHubLogin') {
+                    docker.withRegistry('https://registry.hub.docker.com', 'DOCKER_HUB') {
                         app.push("${env.BUILD_NUMBER}")
                         app.push("latest")
                     }
@@ -50,7 +50,7 @@ pipeline {
                 input 'Deploy to Production?'
                 milestone(1)
                 kubernetesDeploy(
-                    kubeconfigId: 'kubeconfig',
+                    kubeconfigId: 'Kubeconfig',
                     configs: 'deploy_k8s_app.yml',
                     enableConfigSubstitution: true  //specify that substitute values for $ variables in deploy_k8s_app.yml file          
                 )
