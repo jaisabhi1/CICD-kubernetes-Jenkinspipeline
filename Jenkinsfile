@@ -15,7 +15,8 @@ pipeline {
                 archiveArtifacts artifacts: 'target/java-tomcat-maven-example.war'
             }
         }
-        stage('Build Docker Image') {
+    }	    
+   stage('Build Docker Image') {
               steps {
 		echo 'Creating Docker Image'
                 script {
@@ -25,6 +26,7 @@ pipeline {
                     }
                 }
             }
+	}	
         stage('Push Docker Image') {
             steps {
                 script {
@@ -34,6 +36,7 @@ pipeline {
                     }
                 }
             }
+	}	
         
         stage('DeployToProduction') {
             steps {
@@ -47,5 +50,3 @@ pipeline {
             }
         }
     }
-}
-}
